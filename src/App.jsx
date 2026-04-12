@@ -4,6 +4,9 @@ import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import LoginForm from "./components/LoginForm"
 import GamePortal from "./components/GamePortal";
+import AdminPortal from "./components/AdminPortal";
+import NavigationBar from "./components/NavBar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 async function createUserProfileIfNeeded(firebaseUser) {
     const userRef = doc(db, "users", firebaseUser.uid); //uid is the id that firebase creates for each record
@@ -49,7 +52,25 @@ export default function App() {
 
     return (
         <div className="app">
-            {user ? <GamePortal user={user} /> : <LoginForm /> }
+            {/*{user ? user.role === "admin" ? (*/}
+            {user ? user.email === "felipe@mail.com" ? (
+                <BrowserRouter>
+
+                    <NavigationBar />
+
+                    <Routes>
+                        <Route path="/" element={<GamePortal user={user} />} />
+                        <Route path="/admin" element={<AdminPortal user={user} />} />
+                    </Routes>
+
+                </BrowserRouter>
+            ) : (<GamePortal user={user} />) : (            
+                <LoginForm /> 
+                )
+            };
+
+            {/*{user ? <AdminPortal user={user} /> : <LoginForm />}*/}
+            {/*{user ? <GamePortal user={user} /> : <LoginForm /> }*/}
         </div>
     )
 }
