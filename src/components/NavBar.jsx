@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
     return (
-        <div>
+        <div className="navbar">
             <nav>
                 <Link to="/" className="btn-signout">Game</Link>
                 <Link to="/admin" className="btn-signout">Admin</Link>
