@@ -24,7 +24,7 @@ jobs:
          BRANCH_NAME: 'build'
 
         # directory of your React app
-        # default: .
-        # APP_DIRECTORY: '.'
+        default: .
+        APP_DIRECTORY: '.'
 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
