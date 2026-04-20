@@ -1,0 +1,30 @@
+name: Building App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Building App
+      uses: mmedoo/build-react-on-push@v1.3
+      with:
+
+        # build files directory inside branch.
+        # if it doesn't exist, it will be created.
+        # default: root
+         TARGET_DIRECTORY: './builds'
+
+        # branch name, if doesn't exist, it will be created
+        # if it doesn't exist, it will be created.
+         default: build
+         BRANCH_NAME: 'build'
+
+        # directory of your React app
+        # default: .
+        # APP_DIRECTORY: '.'
+
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
