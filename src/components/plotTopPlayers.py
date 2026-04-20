@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 from js import document, window
 
 # We get data from the window context (in react code) as we learned in class :).
-data = json.loads(window.__pyodideData)
+data = json.loads(window.__pyodideDataTop)
 
-names = [d['displayName'] for d in data]
+names = [d['playerName'] for d in data]
 scores = [d['score'] for d in data]
 
 fig, ax = plt.subplots(figsize=(6, 4))

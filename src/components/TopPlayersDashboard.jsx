@@ -1,11 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
-import PLOT_PY from './plot.py?raw';
-
+import PLOT_PY from './plotTopPlayers.py?raw';
 import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 
-const PLAYER_SESSIONS_LIMIT = 10;
 let pyodideReady = null;
+const PLAYER_SESSIONS_LIMIT = 20;
 
 function getPyodide() {
     if (!pyodideReady) {
@@ -18,7 +17,7 @@ function getPyodide() {
     return pyodideReady;
 }
 
-export default function SimpleDashboard() {
+export default function TopPlayersDashboard() {
     const [status, setStatus] = useState('Idle');
 
     useEffect(() => {
@@ -33,8 +32,6 @@ export default function SimpleDashboard() {
                 //    { name: 'Json', score: 3 },
                 //    { name: 'Noudad', score: 100 },
                 //];
-                //window.__pyodideData = JSON.stringify(sampleData);
-
                 const q = query(collection(db, "scores"), limit(PLAYER_SESSIONS_LIMIT));
                 onSnapshot(q, (snapshot) => {
                     const data = snapshot.docs.map((doc) => ({

@@ -1,7 +1,8 @@
 import { signOut } from "firebase/auth";
 import { auth, db } from "../firebase"
 import PlayerSessions from './PlayerSessions';
-
+import SampleDashboard from "./SampleDashboard";
+import TopPlayersDashboard from "./TopPlayersDashboard";
 
 export default function AdminPortal({ user }) {
     const handleSignOut = async () => {
@@ -16,6 +17,8 @@ export default function AdminPortal({ user }) {
         <div className="portal-container">
             <button onClick={handleSignOut} className="btn-signout">Sign Out</button>
             <PlayerSessions />
+            <SampleDashboard />
+            <TopPlayersDashboard />
            
         </div>
     )
