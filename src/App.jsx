@@ -67,7 +67,7 @@ export default function App() {
             ) : (<GamePortal user={user} />) : (            
                 <LoginForm /> 
                 )
-            };
+            }
 
             {/*{user ? <AdminPortal user={user} /> : <LoginForm />}*/}
             {/*{user ? <GamePortal user={user} /> : <LoginForm /> }*/}
