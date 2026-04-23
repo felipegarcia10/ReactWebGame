@@ -40,7 +40,9 @@ export default function TopPlayersDashboard() {
 
                     console.log(JSON.stringify(data));
                     window.__pyodideDataTop = JSON.stringify(data);
+                      //await pyodide.runPythonAsync(PLOT_PY);
                 });
+                //window.__pyodideDataTop = JSON.stringify(sampleData);
 
                 setStatus('Running Python :(');
                 await pyodide.runPythonAsync(PLOT_PY);
