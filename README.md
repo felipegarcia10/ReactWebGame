@@ -1,13 +1,13 @@
 PG29 Felipe
 
 
-CLOUD COMPUTING A2
+CLOUD COMPUTING A2 TELEMETRY
 
 GitHub Link to the react Project:
 https://github.com/felipegarcia10/ReactWebGame.git
 
-GitHub link to the Unity Project:
-https://github.com/felipegarcia10/Pipelines_FlappiFlaps.git
+link to the website:
+https://felipegarcia10.github.io/ReactWebGame/
 
 Admin user: felipe@mail.com
 password felipe123
