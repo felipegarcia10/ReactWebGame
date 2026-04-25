@@ -4,14 +4,13 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from js import document, window
 
-# We get data from the window context (in react code) as we learned in class :).
 data = json.loads(window.__pyodideData)
 
-names = [d['name'] for d in data]
+names = [d['playerName'] for d in data]
 scores = [d['score'] for d in data]
 
-fig, ax = plt.subplots(figsize=(6, 4))
-ax.bar(names, scores, color='skyblue', edgecolor='blue')
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.bar(names, scores, color='orange', edgecolor='blue')
 ax.set_title('Player Scores')
 ax.set_ylabel('Scores')
 

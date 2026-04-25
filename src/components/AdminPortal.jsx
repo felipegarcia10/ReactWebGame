@@ -16,7 +16,6 @@ export default function AdminPortal({ user }) {
     return (
         <div className="portal-container">
             <button onClick={handleSignOut} className="btn-signout">Sign Out</button>
-            <PlayerSessions />
             <SampleDashboard />
             <TopPlayersDashboard />
            

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { doc, getDoc, setDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import LoginForm from "./components/LoginForm"
 import GamePortal from "./components/GamePortal";
@@ -28,18 +28,41 @@ async function createUserProfileIfNeeded(firebaseUser) {
 export default function App() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [userRole, setUserRole] = useState("");
 
     useEffect(() => {
+        let unsubscribeUserDoc = null;
+
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
                 await createUserProfileIfNeeded(firebaseUser);
                 setUser(firebaseUser);
+
+                const userRef = doc(
+                    db, "adminUsers", firebaseUser.email
+                );
+
+                unsubscribeUserDoc = onSnapshot(userRef, (snapshot) => {
+
+                    if (snapshot.exists()) {
+                        setUserRole(snapshot.data().role);
+                    }
+                    else {
+                        setUserRole("player");
+                    }
+
+                });
             } else {
                 setUser(null);
             }
             setLoading(false);
         })
-        return () => unsubscribe();
+        return () => {
+            unsubscribe();
+            if (unsubscribeUserDoc) {
+                unsubscribeUserDoc();
+            }
+        }
     }, []);
 
     if (loading) {
@@ -52,8 +75,7 @@ export default function App() {
 
     return (
         <div className="app">
-            {/*{user ? user.role === "admin" ? (*/}
-            {user ? user.email === "felipe@mail.com" ? (
+            {user ? userRole === "admin" ? (
                 <BrowserRouter>
 
                     <NavigationBar />
@@ -68,9 +90,6 @@ export default function App() {
                 <LoginForm /> 
                 )
             }
-
-            {/*{user ? <AdminPortal user={user} /> : <LoginForm />}*/}
-            {/*{user ? <GamePortal user={user} /> : <LoginForm /> }*/}
         </div>
     )
 }
